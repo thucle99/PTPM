@@ -1,0 +1,15 @@
+body{
+    margin: 0px;
+    padding: 0px;
+    font-size: 18px;
+}
+.wrapper{
+    display: flex; 
+}
+.leftContent{
+    background-color: gray;
+    width:calc(100% - 230px) ;
+}
+.toolbar{
+    min-height: 50px !important;
+}
