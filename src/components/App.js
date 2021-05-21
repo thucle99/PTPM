@@ -24,8 +24,8 @@ const useStyles = makeStyles((theme) => ({
       width: `calc(100% - 64px)`,
       marginLeft: 64,
     },
-    backgroundColor:'#3c8dbc',
-    marginBottom:30
+    backgroundColor: '#3c8dbc',
+    marginBottom: 30
   },
   appBarShift: {
     marginLeft: drawerWidth,
@@ -34,8 +34,8 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
-    backgroundColor:'#3c8dbc',
-    marginBottom:30
+    backgroundColor: '#3c8dbc',
+    marginBottom: 30
   },
 
   menuButton: {
@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
-     border:0,
+    border: 0,
   },
   drawerClose: {
     transition: theme.transitions.create("width", {
@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("sm")]: {
       width: theme.spacing(9) + 1,
     },
-    border:0,
+    border: 0,
   },
   toolbar: {
     display: "flex",
@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
     ...theme.mixins.toolbar,
   },
   content: {
-    marginTop:50,
+    marginTop: 50,
     flexGrow: 1,
     padding: theme.spacing(3),
   },
