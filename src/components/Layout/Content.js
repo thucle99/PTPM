@@ -15,6 +15,8 @@ import { getListImage } from "../../api/image";
 import { makeStyles } from "@material-ui/core/styles";
 import InfoIcon from '@material-ui/icons/Info';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
+import axios from "axios";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -58,6 +60,35 @@ export default function Content() {
     }
     setIsFetching(true);
   };
+  
+  const download = (urlImage,idImage) =>  {
+    console.log(urlImage);
+    axios({
+      url: urlImage, 
+      method: 'GET',
+      responseType: 'blob', // important
+    }).then((response) => {
+       const url = window.URL.createObjectURL(new Blob([response.data]));
+       const link = document.createElement('a');
+       link.href = url;
+       link.setAttribute('download', idImage+'.jpg'); //or any other extension
+       document.body.appendChild(link);
+       link.click();
+    });
+    
+  };
+  // return (
+  //   <div className="App">
+  //     <a
+  //       href="https://unsplash.com/photos/VGDaRSGZbww/download"
+  //       download
+  //       onClick={() => download()}
+  //     >
+  //       <i className="fa fa-download" />
+  //       download
+  //     </a>
+  //   </div>
+  // );
 
   useEffect(() => {
     getData(page);
@@ -110,7 +141,7 @@ export default function Content() {
                   subtitle={<span>by: {item.user.name}</span>}
                   actionIcon={
                     <IconButton aria-label={`info about ${item.description}`} className={classes.icon}>
-                      <StarBorderIcon />
+                      <StarBorderIcon  className={classes.unstar} onClick={() => download(item.urls.raw,item.id)}/>
                     </IconButton>
                   }
                 />
