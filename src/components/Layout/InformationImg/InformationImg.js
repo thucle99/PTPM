@@ -83,11 +83,7 @@ export default function InformationImg(props) {
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
-  // function phongto(){
-  //   var width = document.getElementsByClassName('anhto').width.value;
-  //   console.log(width);
-  //   width = width*1.2; 
-  // }
+ 
 
   const handleClose = (event) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
@@ -120,6 +116,7 @@ export default function InformationImg(props) {
             <div className={styles.header}>
               <div className={styles.header__left}>
                 {/* <div className ={styles.header__left__img}> */}
+                
                 <a href="#">
                   <img
                     src={data.user.profile_image.small}
