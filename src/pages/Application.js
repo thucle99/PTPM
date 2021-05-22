@@ -1,8 +1,9 @@
 import firebase from "firebase";
 import React, { useEffect, useState } from "react";
-import App from '../components/App';
-import Login from '../components/Login'
-import {initFirebase} from '../api/firebase-client'
+// import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import App from "../components/App";
+import Login from "../components/Login";
+import { initFirebase } from "../api/firebase-client";
 
 initFirebase();
 
@@ -16,11 +17,15 @@ export default function Application(props) {
   }, []);
   return (
     <div>
-      {!isSignedIn ? (       
+      {!isSignedIn ? (
         <Login setIsSignedIn={setIsSignedIn}/>
       ) : (
           <App/>
       )}
     </div>
+    // <Switch>
+    //   <Route exact path="/login" component={Login} />
+    //   {this.state.authenticated && <Route exact path="/" component={App} />}
+    // </Switch>
   );
 }

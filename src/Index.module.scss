@@ -13,3 +13,9 @@
 .firebaseui-idp-button{
   background-color: red;
 }
+.body{
+  ::-webkit-scrollbar{
+      width: 2px;
+      height:2px;
+  }
+}
