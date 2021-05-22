@@ -1,29 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
-import Fade from "@material-ui/core/Fade";
 import Button from "@material-ui/core/Button";
-import ButtonGroup from "@material-ui/core/ButtonGroup";
-import styles from "./InformationImg.module.scss";
+import Fade from "@material-ui/core/Fade";
+import Modal from "@material-ui/core/Modal";
+import { makeStyles } from "@material-ui/core/styles";
 import SvgIcon from "@material-ui/core/SvgIcon";
-import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
-import ClickAwayListener from "@material-ui/core/ClickAwayListener";
-import MenuItem from "@material-ui/core/MenuItem";
-import MenuList from "@material-ui/core/MenuList";
-import Grow from "@material-ui/core/Grow";
-import Paper from "@material-ui/core/Paper";
-import Popper from "@material-ui/core/Popper";
-import FavoriteIcon from "@material-ui/icons/Favorite";
 import AddIcon from "@material-ui/icons/Add";
-import ShareIcon from "@material-ui/icons/Share";
-import InfoIcon from "@material-ui/icons/Info";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
-import VerifiedUserOutlinedIcon from '@material-ui/icons/VerifiedUserOutlined';
-
-
-
+import ShareIcon from "@material-ui/icons/Share";
+import VerifiedUserOutlinedIcon from "@material-ui/icons/VerifiedUserOutlined";
+import React, { useEffect, useState } from "react";
+import styles from "./InformationImg.module.scss";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -83,7 +71,6 @@ export default function InformationImg(props) {
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
- 
 
   const handleClose = (event) => {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
@@ -115,8 +102,6 @@ export default function InformationImg(props) {
           <div className={classes.paper}>
             <div className={styles.header}>
               <div className={styles.header__left}>
-                {/* <div className ={styles.header__left__img}> */}
-                
                 <a href="#">
                   <img
                     src={data.user.profile_image.small}
@@ -124,36 +109,40 @@ export default function InformationImg(props) {
                     className={styles.img}
                   ></img>
                 </a>
-                {/* </div>
-                <div className = {styles.header__left__content}> */}
                 <p id="transition-modal-title">{data.user.name}</p>
-                {/* </div> */}
               </div>
               <div className={styles.header__right}>
                 <Button variant="outlined">
-                  <AddIcon color="#367fa9" />
+                  <AddIcon color="primary" />
                 </Button>
                 <Button variant="outlined">
-                  <FavoriteIcon color="#367fa9" />
+                  <FavoriteIcon color="primary" />
                 </Button>
-                <Button variant="contained" color= "367fa9">
+                <Button variant="contained" color="primary">
                   Download Free
                 </Button>
               </div>
             </div>
 
             <div className={styles.content}>
-              <img src={data.urls.small} 
-              className = "anhto"
-              onClick = "phongto()"
+              <img
+                src={data.urls.small}
+                className="anhto"
+                onClick="phongto()"
               ></img>
             </div>
 
             <div className={styles.more}>
               <div className={styles.more__left}>
                 <div className={styles.more__left__location}>
-                  <div style={{ fontSize: 40 }} className={styles.more__left__location__icon}>
-                    <LocationOnOutlinedIcon color="#367fa9"  className = {styles.more__left__location__icon}/>
+                  <div
+                    style={{ fontSize: 40 }}
+                    className={styles.more__left__location__icon}
+                  >
+                    <LocationOnOutlinedIcon
+                      color="#367fa9"
+                      className={styles.icon__location}
+                    />
                   </div>
                   <div className={styles.more__left__location__content}>
                     <p>{data.user.location}</p>
@@ -161,23 +150,25 @@ export default function InformationImg(props) {
                 </div>
                 <div className={styles.more__left__location}>
                   <div className={styles.more__left__location__icon}>
-                    <VerifiedUserOutlinedIcon color="#367fa9"  className = {styles.more__left__location__icon}/>
+                    <VerifiedUserOutlinedIcon
+                      color="#367fa9"
+                      className={styles.more__left__location__icon}
+                    />
                   </div>
                   <div className={styles.more__left__location__content}>
-                   <a href = "https://unsplash.com/license" >
-                   Free to use under the Unsplash License
-                   </a>
+                    <a href="https://unsplash.com/license">
+                      Free to use under the Unsplash License
+                    </a>
                   </div>
                 </div>
-               
               </div>
               <div className={styles.more__right}>
                 <Button variant="outlined">
-                  <ShareIcon color="#367fa9" />
+                  <ShareIcon color="primary" />
                   Share
                 </Button>
                 <Button variant="outlined">
-                  <InfoOutlinedIcon color="#367fa9" />
+                  <InfoOutlinedIcon color="primary" />
                   Info
                 </Button>
               </div>
