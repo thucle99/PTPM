@@ -21,10 +21,10 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
+    border: 0,
     boxShadow: theme.shadows[5],
     width: 1000,
-    height: 600,
+    // height: auto,
     padding: theme.spacing(2, 4, 3),
     margin: theme.spacing(1),
   },
@@ -32,57 +32,17 @@ const useStyles = makeStyles((theme) => ({
     color: "rgba(255, 255, 255, 0.54)",
   },
 }));
-function HomeIcon(props) {
-  return (
-    <SvgIcon {...props}>
-      <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-    </SvgIcon>
-  );
-}
 
-const options = ["Small", "Medium", "Large"];
 export default function InformationImg(props) {
   const { data } = props;
   const classes = useStyles();
   const [open, setOpen] = useState(true);
-  const anchorRef = React.useRef(null);
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
-
-  const handleOpen = () => {
-    props.toggle();
-    setOpen(true);
-  };
 
   const handleCloseX = () => {
     props.toggle();
 
     setOpen(false);
   };
-
-  const handleClick = () => {
-    console.info(`You clicked ${options[selectedIndex]}`);
-  };
-
-  const handleMenuItemClick = (event, index) => {
-    setSelectedIndex(index);
-    setOpen(false);
-  };
-
-  const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen);
-  };
-
-  const handleClose = (event) => {
-    if (anchorRef.current && anchorRef.current.contains(event.target)) {
-      return;
-    }
-
-    setOpen(false);
-  };
-
-  useEffect(() => {
-    console.log("props", props.data);
-  });
 
   return (
     <div>
