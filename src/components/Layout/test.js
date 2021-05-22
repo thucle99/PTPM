@@ -14,7 +14,7 @@ import Skeleton from "@material-ui/lab/Skeleton";
 import { getListImage } from "../../api/image";
 import { makeStyles } from "@material-ui/core/styles";
 import InfoIcon from '@material-ui/icons/Info';
-import StarBorderIcon from '@material-ui/icons/Favorite';
+import StarBorderIcon from '@material-ui/icons/StarBorder';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -70,33 +70,51 @@ export default function Content() {
     getData(page + 1);
     setPage(page + 1);
   }, [isFetching]);
-  const a= (img,name)=>(
-    <div className={styles.information}>
-      <img src={img}/>
-      <span>{name}</span>
-    </div>
-  )
   return (
+    // <LightgalleryProvider className={styles.header}>
+    //   <Grid container spacing={1} className={styles.content}>
+    //     {listImg.map((item, index) => (
+    //       <Grid item sm={6} lg={4} key={index}>
+    //         <LightgalleryItem group="1" src={item.urls.small} >
+    //         <img src={item.urls.small} className={styles.img} />
+    //       </LightgalleryItem>
+    //       </Grid>
+    //     ))}
+    //   </Grid>
+    //   {isFetching || (
+    //     <Grid container spacing={1}>
+    //       <Grid item sm={6} lg={4}>
+    //         <Skeleton variant="rect" width={350} height={240} />
+    //       </Grid>
+    //       <Grid item sm={6} lg={4}>
+    //         <Skeleton variant="rect" width={350} height={240} />
+    //       </Grid>
+    //       <Grid item sm={6} lg={4}>
+    //         <Skeleton variant="rect" width={350} height={240} />
+    //       </Grid>
+    //     </Grid>
+    //   )}
+    // </LightgalleryProvider>
+
     <div className={classes.root}>
+      <LightgalleryProvider className={styles.header}>
         <Grid container spacing={1} className={styles.content}>
           {listImg.map((item, index) => (
             <Grid item sm={6} lg={4} key={index} className={styles.main}>
               <GridListTile key={item.id}  >
               <LightgalleryItem group="1" src={item.urls.small}>
-                <img src={item.urls.small} 
-                alt={item.description}
-                className={styles.img} />
+                <img src={item.urls.small} className={styles.img} />
               </LightgalleryItem>
                 <GridListTileBar
-                  title={a(item.user.profile_image.small,item.user.name)}
+                  title={item.description}
+                  subtitle={<span>by: {item.user.name}</span>}
                   actionIcon={
-                    <IconButton aria-label={`info about ${item.description}`} className={classes.icon}>
-                      <p className={styles.react}>{item.likes}</p>
+                    <IconButton aria-label={`info about ${item.description}`} 
+                    className={classes.icon}>
                       <StarBorderIcon />
                     </IconButton>
                   }
-                >
-                </GridListTileBar>
+                />
               </GridListTile>
             </Grid>
           ))}
@@ -114,6 +132,7 @@ export default function Content() {
             </Grid>
           </Grid>
         )}
-      </div>
+      </LightgalleryProvider>
+    </div>
   );
 }
