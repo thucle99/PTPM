@@ -1,20 +1,12 @@
-import styles from "./Content.module.scss";
-import { useState, useEffect } from "react";
-import "lightgallery.js/dist/css/lightgallery.css";
-import { LightgalleryProvider, LightgalleryItem } from "react-lightgallery";
-import {
-  Grid,
-  GridList,
-  GridListTile,
-  GridListTileBar,
-  ListSubheader,
-  IconButton,
-} from "@material-ui/core";
-import Skeleton from "@material-ui/lab/Skeleton";
-import { getListImage } from "../../api/image";
+import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import InfoIcon from '@material-ui/icons/Info';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
+import Skeleton from "@material-ui/lab/Skeleton";
+import "lightgallery.js/dist/css/lightgallery.css";
+import { useEffect, useState } from "react";
+import { getListImage } from "../../api/image";
+import InformationImg from "./InformationImg/InformationImg";
+import ListImg from "./ListImg/ListImg";
+import styles from "./Content.module.scss";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,13 +28,12 @@ const useStyles = makeStyles((theme) => ({
 export default function Content() {
   const [listImg, setListImg] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
+  const [visible, setVisible] = useState(false);
   const [page, setPage] = useState(1);
   const classes = useStyles();
 
   const getData = (page) => {
     getListImage(page).then((res) => {
-      console.log("res", res.data);
-      console.log("page", page);
       setIsFetching(false);
       setListImg([...listImg, ...res.data]);
     });
@@ -70,68 +61,26 @@ export default function Content() {
     getData(page + 1);
     setPage(page + 1);
   }, [isFetching]);
-  return (
-    // <LightgalleryProvider className={styles.header}>
-    //   <Grid container spacing={1} className={styles.content}>
-    //     {listImg.map((item, index) => (
-    //       <Grid item sm={6} lg={4} key={index}>
-    //         <LightgalleryItem group="1" src={item.urls.small} >
-    //         <img src={item.urls.small} className={styles.img} />
-    //       </LightgalleryItem>
-    //       </Grid>
-    //     ))}
-    //   </Grid>
-    //   {isFetching || (
-    //     <Grid container spacing={1}>
-    //       <Grid item sm={6} lg={4}>
-    //         <Skeleton variant="rect" width={350} height={240} />
-    //       </Grid>
-    //       <Grid item sm={6} lg={4}>
-    //         <Skeleton variant="rect" width={350} height={240} />
-    //       </Grid>
-    //       <Grid item sm={6} lg={4}>
-    //         <Skeleton variant="rect" width={350} height={240} />
-    //       </Grid>
-    //     </Grid>
-    //   )}
-    // </LightgalleryProvider>
 
+  return (
     <div className={classes.root}>
-      <LightgalleryProvider className={styles.header}>
-        <Grid container spacing={1} className={styles.content}>
-          {listImg.map((item, index) => (
-            <Grid item sm={6} lg={4} key={index} className={styles.main}>
-              <GridListTile key={item.id}  >
-              <LightgalleryItem group="1" src={item.urls.small}>
-                <img src={item.urls.small} className={styles.img} />
-              </LightgalleryItem>
-                <GridListTileBar
-                  title={item.description}
-                  subtitle={<span>by: {item.user.name}</span>}
-                  actionIcon={
-                    <IconButton aria-label={`info about ${item.description}`} className={classes.icon}>
-                      <StarBorderIcon />
-                    </IconButton>
-                  }
-                />
-              </GridListTile>
-            </Grid>
-          ))}
-        </Grid>
-        {isFetching || (
-          <Grid container spacing={1}>
-            <Grid item sm={6} lg={4}>
-              <Skeleton variant="rect" width={350} height={240} />
-            </Grid>
-            <Grid item sm={6} lg={4}>
-              <Skeleton variant="rect" width={350} height={240} />
-            </Grid>
-            <Grid item sm={6} lg={4}>
-              <Skeleton variant="rect" width={350} height={240} />
-            </Grid>
+      <Grid container spacing={1} className={styles.content}>
+        {listImg &&
+          listImg.map((item, index) => <ListImg key={index} item={item} />)}
+      </Grid>
+      {isFetching || (
+        <Grid container spacing={1}>
+          <Grid item sm={6} lg={4}>
+            <Skeleton variant="rect" width={350} height={240} />
           </Grid>
-        )}
-      </LightgalleryProvider>
+          <Grid item sm={6} lg={4}>
+            <Skeleton variant="rect" width={350} height={240} />
+          </Grid>
+          <Grid item sm={6} lg={4}>
+            <Skeleton variant="rect" width={350} height={240} />
+          </Grid>
+        </Grid>
+      )}
     </div>
   );
 }
