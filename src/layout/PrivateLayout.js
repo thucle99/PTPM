@@ -5,22 +5,15 @@ import IconButton from "@material-ui/core/IconButton";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import MenuIcon from "@material-ui/icons/Menu";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useHistory,
-  Redirect,
-} from "react-router-dom";
 import clsx from "clsx";
 import { useState } from "react";
-import Content from "./Layout/Content";
-import Header from "./Layout/Header";
-import SideBar from "./Layout/SideBar";
-import SideBarWide from "./Layout/SideBarWide";
-import Profile from "./Proflie/Profile";
-import styles from "./App.module.scss";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Content from "../components/Layout/Content";
+import Header from "../components/Layout/Header";
+import SideBar from "../components/Layout/SideBar";
+import SideBarWide from "../components/Layout/SideBarWide";
+import Profile from "../pages/Proflie/Profile";
+import styles from "./PrivateLayout.module.scss";
 
 const drawerWidth = 240;
 
@@ -156,8 +149,9 @@ export default function App(props) {
           </Route>
 
           <Route path="/profile">
-            <Profile/>
+            <Profile />
           </Route>
+          <Router path={`/:topicId`} children={<Profile />}></Router>
         </Switch>
       </main>
     </div>
