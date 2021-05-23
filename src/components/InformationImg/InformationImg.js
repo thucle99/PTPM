@@ -3,14 +3,14 @@ import Button from "@material-ui/core/Button";
 import Fade from "@material-ui/core/Fade";
 import Modal from "@material-ui/core/Modal";
 import { makeStyles } from "@material-ui/core/styles";
-import SvgIcon from "@material-ui/core/SvgIcon";
 import AddIcon from "@material-ui/icons/Add";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
 import ShareIcon from "@material-ui/icons/Share";
 import VerifiedUserOutlinedIcon from "@material-ui/icons/VerifiedUserOutlined";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import styles from "./InformationImg.module.scss";
 
 const useStyles = makeStyles((theme) => ({
@@ -39,7 +39,6 @@ export default function InformationImg(props) {
 
   const handleCloseX = () => {
     props.toggle();
-
     setOpen(false);
   };
 
@@ -60,16 +59,17 @@ export default function InformationImg(props) {
         <Fade in={open}>
           <div className={classes.paper}>
             <div className={styles.header}>
-              <div className={styles.header__left}>
-                <a href="#">
-                  <img
-                    src={data.user.profile_image.small}
-                    alt="avatar"
-                    className={styles.img}
-                  ></img>
-                </a>
+              <Link
+                to={`profile?username=${data.user.username}`}
+                className={styles.header__left}
+              >
+                <img
+                  src={data.user.profile_image.small}
+                  alt="avatar"
+                  className={styles.img}
+                ></img>
                 <p id="transition-modal-title">{data.user.name}</p>
-              </div>
+              </Link>
               <div className={styles.header__right}>
                 <Button variant="outlined">
                   <AddIcon color="primary" />

@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
-import App from "./components/App";
+import App from "./layout/PrivateLayout";
 import Application from "./pages/Application";
 import "./Index.module.scss";
 

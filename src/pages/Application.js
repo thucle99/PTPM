@@ -8,8 +8,8 @@ import {
   useHistory,
   Redirect ,
 } from "react-router-dom";
-import App from "../components/App";
-import Login from "../components/Login";
+import App from "../layout/PrivateLayout";
+import Login from "./Login/Login";
 import { initFirebase } from "../api/firebase-client";
 
 initFirebase();

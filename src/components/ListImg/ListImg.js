@@ -58,15 +58,15 @@ export default function ListImg(props) {
         <GridListTileBar
           title={titleBar(item.user.profile_image.small, item.user.name)}
           actionIcon={
-              <IconButton
+            <IconButton
               aria-label={`info about ${item.description}`}
               className={classes.icon}
-              >
+            >
               <p className={styles.react}>{item.likes}</p>
               <FavoriteIcon />
             </IconButton>
           }
-          ></GridListTileBar>
+        ></GridListTileBar>
       </GridListTile>
       {visible == true && <InformationImg toggle={toggle} data={item} />}
     </Grid>

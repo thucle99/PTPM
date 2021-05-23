@@ -4,7 +4,7 @@ import Skeleton from "@material-ui/lab/Skeleton";
 import { useEffect, useState } from "react";
 import { getListImage } from "../../api/image";
 import {getImageByTopic} from "../../api/topic"
-import ListImg from "./ListImg/ListImg";
+import ListImg from "../ListImg/ListImg";
 import styles from "./Content.module.scss";
 
 const useStyles = makeStyles((theme) => ({
