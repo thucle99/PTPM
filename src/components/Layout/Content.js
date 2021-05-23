@@ -1,10 +1,9 @@
 import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Skeleton from "@material-ui/lab/Skeleton";
-import "lightgallery.js/dist/css/lightgallery.css";
 import { useEffect, useState } from "react";
 import { getListImage } from "../../api/image";
-import InformationImg from "./InformationImg/InformationImg";
+import {getImageByTopic} from "../../api/topic"
 import ListImg from "./ListImg/ListImg";
 import styles from "./Content.module.scss";
 
@@ -25,17 +24,30 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Content() {
+export default function Content(props) {
   const [listImg, setListImg] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
-  const [visible, setVisible] = useState(false);
+  const [topic, setTopic] = useState("");
   const [page, setPage] = useState(1);
   const classes = useStyles();
 
   const getData = (page) => {
-    getListImage(page).then((res) => {
+    // getListImage(page).then((res) => {
+    //   setIsFetching(false);
+    //   setListImg([...listImg, ...res.data]);
+    // });
+    console.log("props.idTopic",props.idTopic);
+    console.log("Topic",props.topic);
+    console.log("page",page);
+    setTopic(props.idTopic)
+    getImageByTopic(props.idTopic).then((res) => {
       setIsFetching(false);
-      setListImg([...listImg, ...res.data]);
+      if(topic==props.idTopic){
+        setListImg([...listImg, ...res.data]);
+      }
+      else{
+        setListImg(res.data);
+      }
     });
   };
 
@@ -54,7 +66,7 @@ export default function Content() {
     getData(page);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  },[props.idTopic]);
 
   useEffect(() => {
     if (!isFetching) return;

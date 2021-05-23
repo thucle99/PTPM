@@ -1,23 +1,21 @@
 import {
-  MenuList,
-  MenuItem,
-  Typography,
-  Paper,
-  Avatar,
+  Avatar, MenuItem, MenuList,
+
+
+  Paper, Typography
 } from "@material-ui/core";
 import {
-  Send,
-  Lens,
   AccountCircle,
   AddAPhoto,
   AddToQueue,
   Album,
   Apps,
-  BrightnessHigh,
+  BrightnessHigh, Lens, Send
 } from "@material-ui/icons";
-import styles from "./SideBar.module.scss";
-import avatar from "../../img/avatar.jpg";
 import firebase from "firebase";
+import { Link } from "react-router-dom";
+import avatar from "../../img/avatar.jpg";
+import styles from "./SideBar.module.scss";
 
 export default function SideBar() {
   return (
@@ -59,11 +57,13 @@ export default function SideBar() {
           <Paper className={styles.navigation__content}>
             <MenuList className={styles.menu}>
               <MenuItem className={styles.menu__item}>
-                <AccountCircle
-                  fontSize="small"
-                  className={styles.menu__item__icon}
-                />
-                <Typography>Profile</Typography>
+                <Link to="/profile">
+                  <AccountCircle
+                    fontSize="small"
+                    className={styles.menu__item__icon}
+                  />
+                  <Typography>Profile</Typography>
+                </Link>
               </MenuItem>
               <MenuItem className={styles.menu__item}>
                 <Send fontSize="small" className={styles.menu__item__icon} />

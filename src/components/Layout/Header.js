@@ -7,6 +7,7 @@ import {
   Paper,
   Button,
 } from "@material-ui/core";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import {
   NotificationsNone,
   Settings,
@@ -45,31 +46,32 @@ export default function Header(props) {
     firebase.auth().signOut();
   };
 
-  useEffect(() => {
-    getListTopic().then((res) => {
-      console.log(
-        "res",
-        res.data.map((item) => item.title)
-      );
-      setListTopic(res.data.map((item) => item.title));
-    });
-  }, []);
   return (
     <div className={styles.header}>
       <Grid container spacing={3} className={styles.header}>
-        <Grid item xs={1} className={styles.header__item}>
-          <Home />
+        <Grid item xs={2} className={styles.header__item}>
+          <Link to="/">
+            <Home />
+          </Link>
         </Grid>
-        {listTopic.map((item, index) => {
-          if (listTopic.indexOf(item) % 2 == 0) {
-            return (
-              <Grid item xs={2} className={styles.header__item} key={index}>
-                {item}
-              </Grid>
-            );
-          }
-        })}
-        <Grid className={styles.header__item} item xs={1} onClick={handleClickOpen}>
+        <Grid item xs={2} className={styles.header__item}>
+          <Link to="/nature">Nature</Link>
+        </Grid>
+        <Grid item xs={2} className={styles.header__item}>
+          <Link to="/people">People</Link>
+        </Grid>
+        <Grid item xs={2} className={styles.header__item}>
+          <Link to="/fashion">Fashion</Link>
+        </Grid>
+        <Grid item xs={2} className={styles.header__item}>
+          <Link to="/architecture">Architecture</Link>
+        </Grid>
+        <Grid
+          className={styles.header__item}
+          item
+          xs={2}
+          onClick={handleClickOpen}
+        >
           <ExitToApp />
         </Grid>
       </Grid>

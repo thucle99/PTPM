@@ -5,13 +5,22 @@ import IconButton from "@material-ui/core/IconButton";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import MenuIcon from "@material-ui/icons/Menu";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useHistory,
+  Redirect,
+} from "react-router-dom";
 import clsx from "clsx";
 import { useState } from "react";
-import styles from "./App.module.scss";
 import Content from "./Layout/Content";
 import Header from "./Layout/Header";
 import SideBar from "./Layout/SideBar";
 import SideBarWide from "./Layout/SideBarWide";
+import Profile from "./Proflie/Profile";
+import styles from "./App.module.scss";
 
 const drawerWidth = 240;
 
@@ -24,8 +33,8 @@ const useStyles = makeStyles((theme) => ({
       width: `calc(100% - 64px)`,
       marginLeft: 64,
     },
-    backgroundColor:'#3c8dbc',
-    marginBottom:30
+    backgroundColor: "#3c8dbc",
+    marginBottom: 30,
   },
   appBarShift: {
     marginLeft: drawerWidth,
@@ -34,8 +43,8 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
-    backgroundColor:'#3c8dbc',
-    marginBottom:30
+    backgroundColor: "#3c8dbc",
+    marginBottom: 30,
   },
 
   menuButton: {
@@ -55,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
-     border:0,
+    border: 0,
   },
   drawerClose: {
     transition: theme.transitions.create("width", {
@@ -67,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("sm")]: {
       width: theme.spacing(9) + 1,
     },
-    border:0,
+    border: 0,
   },
   toolbar: {
     display: "flex",
@@ -78,13 +87,13 @@ const useStyles = makeStyles((theme) => ({
     ...theme.mixins.toolbar,
   },
   content: {
-    marginTop:50,
+    marginTop: 50,
     flexGrow: 1,
     padding: theme.spacing(3),
   },
 }));
 
-export default function MiniDrawer() {
+export default function App(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
@@ -129,7 +138,27 @@ export default function MiniDrawer() {
         {open ? <SideBarWide /> : <SideBar />}
       </Drawer>
       <main className={classes.content}>
-        <Content />
+        <Switch>
+          <Route exact path="/">
+            <Content idTopic="bo8jQKTaE0Y" />
+          </Route>
+          <Route path="/nature">
+            <Content idTopic="6sMVjTLSkeQ" />
+          </Route>
+          <Route path="/people">
+            <Content idTopic="towJZFskpGg" />
+          </Route>
+          <Route path="/fashion">
+            <Content idTopic="S4MKLAsBB74" />
+          </Route>
+          <Route path="/architecture">
+            <Content idTopic="rnSKDHwwYUk" />
+          </Route>
+
+          <Route path="/profile">
+            <Profile/>
+          </Route>
+        </Switch>
       </main>
     </div>
   );

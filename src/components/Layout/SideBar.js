@@ -10,9 +10,9 @@ import {
   Apps,
   BrightnessHigh, Send
 } from "@material-ui/icons";
-import { useState } from "react";
-import avatar from "../../img/avatar.jpg";
 import firebase from "firebase";
+import { Link } from "react-router-dom";
+import avatar from "../../img/avatar.jpg";
 import styles from "./SideBar.module.scss";
   
   export default function Login() {  
@@ -40,7 +40,7 @@ import styles from "./SideBar.module.scss";
             <Paper className={styles.navigation__content}>
               <MenuList className={styles.menu}>
                 <MenuItem className={styles.menu__item}>
-                  <AccountCircle fontSize="small" className={styles.menu__item__icon} />
+                  <Link to="/profile"> <AccountCircle fontSize="small" className={styles.menu__item__icon} /></Link>
                 </MenuItem>
                 <MenuItem className={styles.menu__item}>
                   <Send fontSize="small" className={styles.menu__item__icon} />
