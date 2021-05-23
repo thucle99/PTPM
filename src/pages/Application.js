@@ -1,20 +1,15 @@
 import firebase from "firebase";
 import React, { useEffect, useState } from "react";
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useHistory,
-  Redirect ,
+  useHistory
 } from "react-router-dom";
+import { initFirebase } from "../api/firebase-client";
 import App from "../layout/PrivateLayout";
 import Login from "./Login/Login";
-import { initFirebase } from "../api/firebase-client";
 
 initFirebase();
 
-export default function Application(props) {
+export default function Application() {
   const [isSignedIn, setIsSignedIn] = useState(false);
   const history = useHistory();
 

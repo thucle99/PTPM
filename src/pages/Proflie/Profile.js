@@ -1,14 +1,8 @@
-import React,{useState,useEffect} from 'react'
-import {getUser} from '../../api/user'
+import React, { useEffect, useState } from 'react';
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-    useParams,
     useLocation
-  } from "react-router-dom";
-import styles from "./Profile.module.scss";
+} from "react-router-dom";
+import { getUser } from '../../api/user';
 
 export default function Profile(props) {
     let query = new URLSearchParams(useLocation().search).get("username");
