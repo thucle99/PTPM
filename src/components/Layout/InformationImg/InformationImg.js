@@ -24,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
     border: 0,
     boxShadow: theme.shadows[5],
     width: 1000,
-    // height: auto,
     padding: theme.spacing(2, 4, 3),
     margin: theme.spacing(1),
   },

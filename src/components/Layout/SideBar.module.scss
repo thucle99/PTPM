@@ -55,6 +55,9 @@
             &__icon{
                 padding-right: 7px;
             }
+            a{
+                display: flex;
+            }
         }
         &__item:hover{
             background-color:#1a2226;

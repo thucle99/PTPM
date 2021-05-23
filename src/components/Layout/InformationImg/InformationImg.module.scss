@@ -54,6 +54,10 @@
           padding-bottom: 5px;
         }
       }
+      a{
+        text-decoration: none;
+          color:black
+      }
     }
   }
   &__right {
@@ -71,6 +75,7 @@
     margin: auto;
     width: 100%;
     height: auto;
+    max-height: 500px;
   }
 }
 .name {

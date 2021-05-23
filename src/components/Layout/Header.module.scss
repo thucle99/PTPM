@@ -1,4 +1,9 @@
 .header{
     width: 100%;
     text-align: center;
+    display: flex;
+    &__item{
+        width: 30px;
+        cursor: pointer;
+    }
 }
