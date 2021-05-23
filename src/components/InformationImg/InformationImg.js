@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import Backdrop from "@material-ui/core/Backdrop";
 import Button from "@material-ui/core/Button";
 import Fade from "@material-ui/core/Fade";
@@ -9,8 +10,8 @@ import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
 import ShareIcon from "@material-ui/icons/Share";
 import VerifiedUserOutlinedIcon from "@material-ui/icons/VerifiedUserOutlined";
-import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import {downloadImage} from "../../api/image"
 import styles from "./InformationImg.module.scss";
 
 const useStyles = makeStyles((theme) => ({
@@ -77,7 +78,11 @@ export default function InformationImg(props) {
                 <Button variant="outlined">
                   <FavoriteIcon color="primary" />
                 </Button>
-                <Button variant="contained" color="primary">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => downloadImage(data.urls.raw, data.id)}
+                >
                   Download Free
                 </Button>
               </div>

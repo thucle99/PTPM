@@ -2,7 +2,6 @@ import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Skeleton from "@material-ui/lab/Skeleton";
 import { useEffect, useState } from "react";
-import { getListImage } from "../../api/image";
 import {getImageByTopic} from "../../api/topic"
 import ListImg from "../ListImg/ListImg";
 import styles from "./Content.module.scss";
@@ -38,9 +37,8 @@ export default function Content(props) {
     // });
     console.log("props.idTopic",props.idTopic);
     console.log("Topic",props.topic);
-    console.log("page",page);
     setTopic(props.idTopic)
-    getImageByTopic(props.idTopic).then((res) => {
+    getImageByTopic(props.idTopic,page).then((res) => {
       setIsFetching(false);
       if(topic==props.idTopic){
         setListImg([...listImg, ...res.data]);
@@ -53,13 +51,13 @@ export default function Content(props) {
 
   const handleScroll = () => {
     if (
-      window.innerHeight + document.documentElement.scrollTop !==
-        document.documentElement.scrollHeight ||
+      window.innerHeight + document.documentElement.scrollTop  >=
+        document.documentElement.scrollHeight||
       isFetching
     ) {
-      return;
+      setIsFetching(true);
     }
-    setIsFetching(true);
+    return;
   };
 
   useEffect(() => {
@@ -92,6 +90,7 @@ export default function Content(props) {
             <Skeleton variant="rect" width={350} height={240} />
           </Grid>
         </Grid>
+        // <p>Loading...</p>
       )}
     </div>
   );

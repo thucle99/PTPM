@@ -1,23 +1,18 @@
 import {
-  Grid,
-  Dialog,
+  Button, Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
-  Paper,
-  Button,
+  DialogContentText, Grid,
+  Paper
 } from "@material-ui/core";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import {
-  NotificationsNone,
-  Settings,
   ExitToApp,
-  Home,
+  Home
 } from "@material-ui/icons";
-import { useState, useEffect } from "react";
-import Draggable from "react-draggable";
 import firebase from "firebase";
-import { getListTopic } from "../../api/topic";
+import { useState } from "react";
+import Draggable from "react-draggable";
+import { Link } from "react-router-dom";
 import styles from "./Header.module.scss";
 
 function PaperComponent(props) {
@@ -32,7 +27,6 @@ function PaperComponent(props) {
 }
 
 export default function Header(props) {
-  const [listTopic, setListTopic] = useState([]);
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {

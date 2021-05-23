@@ -8,6 +8,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import "lightgallery.js/dist/css/lightgallery.css";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import InformationImg from "../InformationImg/InformationImg";
 import styles from "./ListImg.module.scss";
 
@@ -40,11 +41,11 @@ export default function ListImg(props) {
     setVisible(false);
   };
 
-  const titleBar = (img, name) => (
-    <div className={styles.information}>
+  const titleBar = (img, name,username) => (
+    <Link to={`profile?username=${username}`} className={styles.information}>
       <img src={img} />
       <span>{name}</span>
-    </div>
+    </Link>
   );
   return (
     <Grid item sm={6} lg={4} className={styles.main}>
@@ -56,7 +57,7 @@ export default function ListImg(props) {
           className={styles.img}
         />
         <GridListTileBar
-          title={titleBar(item.user.profile_image.small, item.user.name)}
+          title={titleBar(item.user.profile_image.small, item.user.name,item.user.username)}
           actionIcon={
             <IconButton
               aria-label={`info about ${item.description}`}
