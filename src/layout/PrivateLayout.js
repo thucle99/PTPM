@@ -2,7 +2,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
 import IconButton from "@material-ui/core/IconButton";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import MenuIcon from "@material-ui/icons/Menu";
 import clsx from "clsx";
@@ -86,9 +86,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function App(props) {
+export default function App() {
   const classes = useStyles();
-  const theme = useTheme();
   const [open, setOpen] = useState(false);
 
   const handleDrawerToggle = () => {
@@ -106,7 +105,7 @@ export default function App(props) {
             color="inherit"
             aria-label="open drawer"
             edge="start"
-            onClick={handleDrawerToggle}
+            onClick={()=>handleDrawerToggle}
             className={classes.menuButton}
           >
             <MenuIcon />

@@ -1,0 +1,70 @@
+.infomation {
+  display: flex;
+  margin-left: 5%;
+  margin-right: 5%;
+  width: 100%;
+  
+  &__avatar {
+    width: 60%;
+    border-radius: 50%;
+  }
+  &__content {
+    width: 80%;
+    margin-left: auto;
+    margin-right: 10px ;
+    &__name {
+      display: flex;
+      h1{
+          margin: 0px;
+      }
+      button{
+        margin-left: 10px !important;
+      }
+    }
+    &__location {
+      margin-left: auto;
+      display: flex;
+      &__icon {
+        align-items: center;
+        justify-items: center;
+        padding-right: 4px;
+        &__location {
+          padding-top: 18px;
+        }
+      }
+      &__content {
+        font-size: 20px;
+        text-decoration: none;
+        color: black;
+      }
+    }
+    &__interest{
+      display:  flex;
+      &__item{
+       
+        margin: 10px !important;
+        .MuiButton-contained {
+          margin: 10 px !important;
+        }
+      
+      }
+    }
+  }
+}
+
+.main{
+    width: 100%;
+    margin-top: 60px;
+    .app__bar{
+        width: 100%;
+        header{
+            background-color: white;
+            box-shadow: none;
+        }
+    }
+}
+.reaction{
+  display: flex;
+  margin-top: 10%;
+  width: 100%;
+}

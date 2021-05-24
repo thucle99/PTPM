@@ -8,6 +8,10 @@ export function getListImage(page) {
   return axios.get(url);
 }
 
+export function getImageByUser(username,page) {
+  return axios.get(`https://api.unsplash.com/users/${username}/photos?client_id=fuOu4odHIMZNCseveRF1qVtYgBE19N5Yt9ET01QehZk&page=${page}`);
+}
+
 export function downloadImage(urlImage,idImage) {
   return  axios({
     url: urlImage, 

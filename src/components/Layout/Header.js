@@ -33,7 +33,7 @@ export default function Header(props) {
     setOpen(true);
   };
   const handleClose = () => {
-    setOpen(true);
+    setOpen(false);
   };
   const handleSuccess = () => {
     setOpen(false);
