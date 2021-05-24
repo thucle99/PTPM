@@ -171,29 +171,34 @@ export default function Profile(props) {
                 <p>{user.location}</p>
               </div>
             </div>
+            <div>
+            <p>Interest</p>
             <div className={styles.infomation__content__interest}>
-              <p>Interest</p>
-              <div className={styles.infomation__content__interest}>
+              
+             
                 <Button
                   variant="contained"
-                  className="styles.infomation__content__interest__item"
+                  className={styles.infomation__content__interest__item}
                 >
                   Mountain Images and Pictures
                 </Button>
                 <Button
                   variant="contained"
-                  className="styles.infomation__content__interest__item"
+                  className={styles.infomation__content__interest__item}
                 >
                   HD Wallpapers
                 </Button>
                 <Button
                   variant="contained"
-                  className="styles.infomation__content__interest__item"
+                  className={styles.infomation__content__interest__item}
                 >
                   Street
                 </Button>
               </div>
+
             </div>
+            
+          
           </div>
         </div>
         <div className={classes.paper}>
