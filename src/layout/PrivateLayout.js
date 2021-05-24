@@ -2,7 +2,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
 import IconButton from "@material-ui/core/IconButton";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import MenuIcon from "@material-ui/icons/Menu";
 import clsx from "clsx";
@@ -105,7 +105,7 @@ export default function App() {
             color="inherit"
             aria-label="open drawer"
             edge="start"
-            onClick={()=>handleDrawerToggle}
+            onClick={handleDrawerToggle}
             className={classes.menuButton}
           >
             <MenuIcon />
