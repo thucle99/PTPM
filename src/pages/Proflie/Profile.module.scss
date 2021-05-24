@@ -1,0 +1,60 @@
+.infomation {
+  display: flex;
+  margin-left: 5%;
+  margin-right: 5%;
+  width: 100%;
+  
+  &__avatar {
+    width: 60%;
+    border-radius: 50%;
+  }
+  &__content {
+    width: 80%;
+    margin-left: auto;
+    &__name {
+      .MuiButton-root {
+       
+        text-transform: lowercase !important;
+        margin: 10px !important;
+      }
+      .MuiButton-outlined{
+        margin: 10px !important;
+      }
+
+      display: flex;
+    }
+    &__location {
+      margin-left: auto;
+      display: flex;
+      &__icon {
+        align-items: center;
+        justify-items: center;
+        padding-right: 4px;
+        &__location {
+          padding-top: 18px;
+        }
+      }
+      &__content {
+        font-size: 20px;
+        text-decoration: none;
+        color: black;
+      }
+    }
+    &_interest{
+      display:  flex;
+      &__item{
+        background-color:#757575;
+        .MuiButton-contained{
+          font-family: 'Courier New', Courier, monospace !important;
+          margin:  10 px !important;
+          
+        }
+      }
+    }
+  }
+}
+.reaction{
+  display: flex;
+  margin-top: 10%;
+  width: 100%;
+}
