@@ -50,12 +50,11 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     border: 0,
     width: 900,
-    margin: "auto",
-    // padding: theme.spacing(2, 4, 3),
-    // margin: theme.spacing(1),
-
     alignItems: "center",
     justifyContent: "center",
+    margin:"auto"
+
+   
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
