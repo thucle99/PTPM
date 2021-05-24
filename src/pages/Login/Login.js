@@ -81,7 +81,7 @@ export default function Login(props) {
           variant="contained"
           type="submit"
           className={styles.submit}
-          onClick={()=>checkLogin}
+          onClick={checkLogin}
           color="primary"
         >
           Sign In
