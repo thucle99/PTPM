@@ -1,44 +1,21 @@
-import React, { useState, useEffect } from "react";
-import { fade, makeStyles } from "@material-ui/core/styles";
+import { Button } from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
+import Box from "@material-ui/core/Box";
+import Grid from "@material-ui/core/Grid";
+import { makeStyles } from "@material-ui/core/styles";
+import Tab from "@material-ui/core/Tab";
+import Tabs from "@material-ui/core/Tabs";
 import Typography from "@material-ui/core/Typography";
-import InputBase from "@material-ui/core/InputBase";
-import Badge from "@material-ui/core/Badge";
-import MenuItem from "@material-ui/core/MenuItem";
-import Menu from "@material-ui/core/Menu";
-import MenuIcon from "@material-ui/icons/Menu";
-import SearchIcon from "@material-ui/icons/Search";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import MailIcon from "@material-ui/icons/Mail";
-import NotificationsIcon from "@material-ui/icons/Notifications";
-import MoreIcon from "@material-ui/icons/MoreVert";
-import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import EmailOutlinedIcon from "@material-ui/icons/EmailOutlined";
 import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
-import CollectionsBookmarkRoundedIcon from '@material-ui/icons/CollectionsBookmarkRounded';
+import PersonAddIcon from "@material-ui/icons/PersonAdd";
+import PropTypes from "prop-types";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { getImageByUser } from "../../api/image";
 import { getUser } from "../../api/user";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useParams,
-  useLocation,
-} from "react-router-dom";
+import ListImg from "../../components/ListImg/ListImg";
 import styles from "./Profile.module.scss";
-import { Button } from "@material-ui/core";
-import { Autocomplete } from "@material-ui/lab";
-import Paper from "@material-ui/core/Paper";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import ThumbDown from '@material-ui/icons/ThumbDown';
-import ThumbUp from '@material-ui/icons/ThumbUp';
-import Box from '@material-ui/core/Box';
-import PropTypes from 'prop-types';
-import PhotoOutlinedIcon from '@material-ui/icons/PhotoOutlined';
-import FavoriteOutlinedIcon from '@material-ui/icons/FavoriteOutlined';
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -49,29 +26,21 @@ const useStyles = makeStyles((theme) => ({
   paper_info: {
     backgroundColor: theme.palette.background.paper,
     border: 0,
-    width: 900,
+    width: 1000,
+    marginTop: 30,
     alignItems: "center",
     justifyContent: "center",
-    margin:"auto"
-
-   
+    margin: "auto",
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
     border: 0,
-    width: 900,
+    width: 1200,
     marginTop: 50,
     alignItems: "left",
-    
-
   },
   icon: {
     color: "rgba(255, 255, 255, 0.54)",
-  },
-  root: {
-    flexGrow: 1,
-    width: '100%',
-    backgroundColor: theme.palette.background.paper,
   },
 }));
 function TabPanel(props) {
@@ -102,28 +71,56 @@ TabPanel.propTypes = {
 function a11yProps(index) {
   return {
     id: `scrollable-force-tab-${index}`,
-    'aria-controls': `scrollable-force-tabpanel-${index}`,
+    "aria-controls": `scrollable-force-tabpanel-${index}`,
   };
 }
 
 export default function Profile(props) {
   let query = new URLSearchParams(useLocation().search).get("username");
   const classes = useStyles();
-
+  const [value, setValue] = useState(0);
+  const [page, setPage] = useState(1);
   const [user, setUser] = useState("");
+  const [isFetching, setIsFetching] = useState(false);
+  const [listImg, setListImg] = useState([]);
+  const [listImgLike, setListImgLike] = useState([]);
+
+  const getData = (page) => {
+    getImageByUser(query, page).then((res) => {
+      setIsFetching(false);
+      setListImg([...listImg, ...res.data]);
+    });
+  };
+
+  const handleScroll = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop >=
+        document.documentElement.scrollHeight - 100 ||
+      isFetching
+    ) {
+      setIsFetching(true);
+    }
+    return;
+  };
+
   useEffect(() => {
     getUser(query).then((res) => {
-      console.log("data", res.data);
-      console.log(res.data.profile_image.small);
+      const imgLike = res.data.tags.aggregated
+        .filter((item) => item.source)
+        .map((item) => item.source.cover_photo);
+      setListImgLike(imgLike);
       setUser(res.data);
     });
+    getData(page);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  // const [value, setValue] = React.useState(2);
 
-  // const handleChange = (event, newValue) => {
-  //   setValue(newValue);
-  // };
-  const [value, setValue] = React.useState(0);
+  useEffect(() => {
+    if (!isFetching) return;
+    getData(page + 1);
+    setPage(page + 1);
+  }, [isFetching]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -161,7 +158,7 @@ export default function Profile(props) {
             >
               <div className={styles.infomation__content__location__icon}>
                 <LocationOnOutlinedIcon
-                  color="#367fa9"
+                  color="primary"
                   className={
                     styles.infomation__content__location__icon__location
                   }
@@ -172,10 +169,8 @@ export default function Profile(props) {
               </div>
             </div>
             <div>
-            <p>Interest</p>
-            <div className={styles.infomation__content__interest}>
-              
-             
+              <p>Interest</p>
+              <div className={styles.infomation__content__interest}>
                 <Button
                   variant="contained"
                   className={styles.infomation__content__interest__item}
@@ -195,47 +190,46 @@ export default function Profile(props) {
                   Street
                 </Button>
               </div>
-
             </div>
-            
-          
           </div>
         </div>
-        <div className={classes.paper}>
-        <div className={classes.root}>
-      <AppBar position="static" color="default">
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          variant="scrollable"
-          scrollButtons="on"
-          indicatorColor="primary"
-          textColor="primary"
-          aria-label="scrollable force tabs example"
-        >
-          <Tab icon={< PhotoOutlinedIcon/> } label="Photo" {...a11yProps(0)} />
-          <Tab label="Like" icon={<FavoriteOutlinedIcon />} {...a11yProps(1)} />
-          <Tab label="Collection" icon={<CollectionsBookmarkRoundedIcon />} {...a11yProps(2)} />
-          
-          {/* <Tab label="Item Two" icon={<FavoriteIcon />} {...a11yProps(1)} />
-          <Tab label="Item Three" icon={<PersonPinIcon />} {...a11yProps(2)} />
-          <Tab label="Item Four" icon={<HelpIcon />} {...a11yProps(3)} />
-          <Tab label="Item Five" icon={<ShoppingBasket />} {...a11yProps(4)} />
-          <Tab label="Item Six" icon={<ThumbDown />} {...a11yProps(5)} />
-          <Tab label="Item Seven" icon={<ThumbUp />} {...a11yProps(6)} /> */}
-        </Tabs>
-      </AppBar>
-      <TabPanel value={value} index={0}>
-        Item One
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        Item Two
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        Item Three
-      </TabPanel>
-     
-    </div>
+      </div>
+      <div className={styles.main}>
+        <div className={styles.app__bar}>
+          <AppBar
+            position="static"
+            color="default"
+            className={styles.main__tab}
+          >
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              variant="scrollable"
+              scrollButtons="on"
+              indicatorColor="primary"
+              textColor="primary"
+              aria-label="scrollable force tabs example"
+            >
+              <Tab label={`Photo  ${user.total_photos}`} {...a11yProps(0)} />
+              <Tab label={`Like ${user.total_likes}`} {...a11yProps(1)} />
+            </Tabs>
+          </AppBar>
+          <TabPanel value={value} index={0}>
+            <Grid container spacing={1} className={styles.content}>
+              {listImg &&
+                listImg.map((item, index) => (
+                  <ListImg key={index} item={item} />
+                ))}
+            </Grid>
+          </TabPanel>
+          <TabPanel value={value} index={1}>
+            <Grid container spacing={1} className={styles.content}>
+              {listImgLike &&
+                listImgLike.map((item, index) => (
+                  <ListImg key={index} item={item} />
+                ))}
+            </Grid>
+          </TabPanel>
         </div>
       </div>
     </div>

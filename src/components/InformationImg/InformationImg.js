@@ -11,7 +11,7 @@ import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
 import ShareIcon from "@material-ui/icons/Share";
 import VerifiedUserOutlinedIcon from "@material-ui/icons/VerifiedUserOutlined";
 import { Link } from "react-router-dom";
-import {downloadImage} from "../../api/image"
+import { downloadImage } from "../../api/image";
 import styles from "./InformationImg.module.scss";
 
 const useStyles = makeStyles((theme) => ({
@@ -89,11 +89,7 @@ export default function InformationImg(props) {
             </div>
 
             <div className={styles.content}>
-              <img
-                src={data.urls.small}
-                className="anhto"
-                onClick="phongto()"
-              ></img>
+              <img src={data.urls.small} className="anhto" />
             </div>
 
             <div className={styles.more}>
@@ -104,7 +100,7 @@ export default function InformationImg(props) {
                     className={styles.more__left__location__icon}
                   >
                     <LocationOnOutlinedIcon
-                      color="#367fa9"
+                      color="primary"
                       className={styles.icon__location}
                     />
                   </div>
@@ -115,7 +111,7 @@ export default function InformationImg(props) {
                 <div className={styles.more__left__location}>
                   <div className={styles.more__left__location__icon}>
                     <VerifiedUserOutlinedIcon
-                      color="#367fa9"
+                      color="primary"
                       className={styles.more__left__location__icon}
                     />
                   </div>

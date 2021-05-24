@@ -69,7 +69,7 @@ export default function ListImg(props) {
           }
         ></GridListTileBar>
       </GridListTile>
-      {visible == true && <InformationImg toggle={toggle} data={item} />}
+      {visible === true && <InformationImg toggle={toggle} data={item} />}
     </Grid>
   );
 }

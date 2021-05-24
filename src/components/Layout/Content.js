@@ -31,16 +31,10 @@ export default function Content(props) {
   const classes = useStyles();
 
   const getData = (page) => {
-    // getListImage(page).then((res) => {
-    //   setIsFetching(false);
-    //   setListImg([...listImg, ...res.data]);
-    // });
-    console.log("props.idTopic",props.idTopic);
-    console.log("Topic",props.topic);
     setTopic(props.idTopic)
     getImageByTopic(props.idTopic,page).then((res) => {
       setIsFetching(false);
-      if(topic==props.idTopic){
+      if(topic===props.idTopic){
         setListImg([...listImg, ...res.data]);
       }
       else{
@@ -90,7 +84,6 @@ export default function Content(props) {
             <Skeleton variant="rect" width={350} height={240} />
           </Grid>
         </Grid>
-        // <p>Loading...</p>
       )}
     </div>
   );
